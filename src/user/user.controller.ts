@@ -2,11 +2,20 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ConfigService } from '@nestjs/config';
 
-@Controller('user')
+@Controller({ path: 'user', version: '1' })
 export class UserController {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly configService: ConfigService,
+    ) {}
 
+    @Get('getTestName')
+    config() {
+        const result = this.configService.get('TEST_VALUE').name;
+        return result;
+    }
     @Post()
     create(@Body() createUserDto: CreateUserDto) {
         return this.userService.create(createUserDto);
