@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './common/exceptions/base.exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
+import { generateDocument } from './doc';
 declare const module: any;
 
 async function bootstrap() {
@@ -25,6 +26,8 @@ async function bootstrap() {
 
     // 异常处理
     app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter());
+
+    generateDocument(app);
 
     await app.listen(3000);
 }
