@@ -1,0 +1,8 @@
+db:
+  mysql1:
+    host: 127.0.0.7
+    password: 123456
+
+  mysql2:
+    host: 127.0.0.7
+    password: 123456
